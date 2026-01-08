@@ -26,22 +26,24 @@ export class MarkdownFormatter implements IOutputFormatter {
     lines.push("---");
     lines.push("");
 
-    // [ ] Change: Labels for roles (user, assistant, system, tool)
+    // Labels for roles (user, assistant, system, tool)
     for (const message of conversation.messages) {
       const roleLabelMap = {
-        user: "👤 User",
-        assistant: "🤖 Assistant",
-        system: "⚙️ System",
-        tool: "🔧 Tool",
+        user: "jinks908",
+        assistant: "AI",
+        system: "System",
+        tool: "Tool",
       } as const;
-      const roleLabel = roleLabelMap[message.role] || "🔧 Tool";
+      const roleLabel = roleLabelMap[message.role] || "Tool";
 
       lines.push(`## ${roleLabel}`);
-      if (message.timestamp) {
-        lines.push(
-          `Date: ${this.formatDateTimeWithTimezone(message.timestamp)}`,
-        );
-      }
+
+      // NOTE: Disable date/timestamp per message
+      // if (message.timestamp) {
+      //   lines.push(
+      //     `Date: ${this.formatDateTimeWithTimezone(message.timestamp)}`,
+      //   );
+      // }
       lines.push("");
 
       const content = message.content.trim();
