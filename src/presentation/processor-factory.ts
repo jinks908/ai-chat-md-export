@@ -51,7 +51,7 @@ export function createProcessorDependencies(
       formatter = new JsonFormatter();
       break;
     case Format.Markdown:
-      formatter = new MarkdownFormatter();
+      formatter = new MarkdownFormatter(options.platform);
       break;
     default:
       throw new ValidationError(

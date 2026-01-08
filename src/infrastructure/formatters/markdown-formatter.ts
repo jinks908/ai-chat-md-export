@@ -1,4 +1,4 @@
-import { FILE_EXTENSIONS, Format } from "../../domain/config.js";
+import { FILE_EXTENSIONS, Format, Platform } from "../../domain/config.js";
 import type { Conversation } from "../../domain/entities.js";
 import type { IOutputFormatter } from "../../domain/interfaces/output-formatter.js";
 
@@ -17,6 +17,8 @@ import type { IOutputFormatter } from "../../domain/interfaces/output-formatter.
 export class MarkdownFormatter implements IOutputFormatter {
   readonly format = Format.Markdown;
 
+  constructor(private readonly platform: Platform) {}
+
   formatSingle(conversation: Conversation): string {
     const lines: string[] = [];
 
@@ -28,9 +30,10 @@ export class MarkdownFormatter implements IOutputFormatter {
 
     // Labels for roles (user, assistant, system, tool)
     for (const message of conversation.messages) {
+      const assistantLabel = this.platform === Platform.Claude ? "Claude" : "GPT";
       const roleLabelMap = {
         user: "jinks908",
-        assistant: "AI",
+        assistant: assistantLabel,
         system: "System",
         tool: "Tool",
       } as const;
