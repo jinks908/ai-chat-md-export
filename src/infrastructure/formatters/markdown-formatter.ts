@@ -26,6 +26,7 @@ export class MarkdownFormatter implements IOutputFormatter {
     lines.push("---");
     lines.push("");
 
+    // [ ] Change: Labels for roles (user, assistant, system, tool)
     for (const message of conversation.messages) {
       const roleLabelMap = {
         user: "👤 User",
