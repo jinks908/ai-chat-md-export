@@ -30,6 +30,7 @@ export class MarkdownFormatter implements IOutputFormatter {
 
     // Labels for roles (user, assistant, system, tool)
     for (const message of conversation.messages) {
+      // Set assistant label dynamically based on platform
       const assistantLabel = this.platform === Platform.Claude ? "Claude" : "GPT";
       const roleLabelMap = {
         user: "jinks908",
